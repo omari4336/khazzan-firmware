@@ -22,3 +22,7 @@ The default environment builds the ultrasonic firmware. The integration environm
 ## Validation
 
 A team hardware integration test recorded and read back 15 of 15 timestamped ultrasonic measurements. This verified the logging path. Distance calibration and validation against known water levels are pending. Wi-Fi, backend services, and ML are outside this firmware release.
+
+## Contributing
+
+See the [team contribution guide](CONTRIBUTING.md) for branches, reviews, and validation.
