@@ -1,28 +1,23 @@
 # Khazzan ESP32 Firmware
 
-Khazzan is a team capstone prototype for monitoring household water tanks in Jordan. The ESP32 captures ultrasonic echo timing. The integration firmware timestamps readings with a DS3231 RTC and writes them to a CSV file on microSD.
+Khazzan is a graduation-project prototype for monitoring household water tanks in Jordan, using ESP32-WROOM-32, JSN-SR20-Y3.0 ultrasonic sensing, DS3231 RTC and MicroSD.
 
-## Hardware and firmware
+## Production firmware
 
-- ESP32-WROOM-32, JSN-SR20-Y3.0 ultrasonic sensor, DS3231 RTC and microSD module
-- Arduino framework with C++17 and PlatformIO
-- Separate diagnostic environments for the ultrasonic sensor, RTC, microSD and integration
-
-## Build
-
-Open this directory in VS Code with PlatformIO or run the commands below from a PlatformIO shell.
+The default `esp32dev` environment uses the experimentally validated **25 us trigger and 70 ms interrupt-based ECHO capture**, every two seconds. It preserves raw distance and applies the frozen **+2.274955 cm** correction once to valid readings. RTC timestamps and raw/corrected distances are appended to a uniquely named CSV with per-row read-back verification. RTC time is never set automatically; SD is never formatted.
 
 ```sh
 pio run -e esp32dev
-pio run -e khazzan_integration_test
 ```
 
-The default environment builds the ultrasonic firmware. The integration environment builds the timestamped CSV logging test. See [wiring](docs/wiring.md) before connecting hardware. For boards requiring a manual serial port, set your local port through PlatformIO.
+Use local serial-port overrides rather than committing machine-specific settings. See [wiring](docs/wiring.md), [CSV schema v2](docs/CSV_SCHEMA_V2.md), and the [production consolidation and validation report](docs/PRODUCTION_CONSOLIDATION.md).
 
-## Validation
+## Validation status
 
-A team hardware integration test recorded and read back 15 of 15 timestamped ultrasonic measurements. This verified the logging path. Distance calibration and validation against known water levels are pending. Wi-Fi, backend services, and ML are outside this firmware release.
+Historical calibration used 30/50/71/100 cm and independent validation used 40/60/90 cm: 210 controlled flat-wall measurements in total. All independent validation criteria passed using the frozen offset offline. The consolidated production code passed builds for all nine environments, 210 historical edge replays and invalid-capture regression checks. **The consolidated binary has not been uploaded or physically tested.** No accuracy beyond the tested 30â€“100 cm positions or on water surfaces is claimed.
+
+Historical diagnostic environments remain separate, including `khazzan_post_solder_test`. No Wi-Fi, deep sleep, filtering, invented tank geometry or water-level calculation is included.
 
 ## Contributing
 
-See the [team contribution guide](CONTRIBUTING.md) for branches, reviews, and validation.
+Follow the [team contribution guide](CONTRIBUTING.md): use focused branches and pull requests, document software versus hardware verification, and keep raw device logs and local configuration out of commits.
