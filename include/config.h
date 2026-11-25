@@ -6,9 +6,9 @@ inline constexpr uint32_t serialBaud = 115200;
 inline constexpr uint8_t trigPin = 5;
 inline constexpr uint8_t echoPin = 18;
 inline constexpr uint32_t triggerLowUs = 5;
-inline constexpr uint32_t triggerHighUs = 10;
-inline constexpr uint32_t echoTimeoutUs = 40000;
-inline constexpr uint32_t startupDelayMs = 1000;
+inline constexpr uint32_t triggerHighUs = 25;
+inline constexpr uint32_t echoTimeoutUs = 70000;
+inline constexpr uint32_t startupDelayMs = 1500;
 inline constexpr uint32_t measurementIntervalMs = 2000;
 // Engineering starting values, NOT verified JSN-SR20-Y3.0 specifications.
 inline constexpr float soundSpeedCmPerUs = 0.0343f;
