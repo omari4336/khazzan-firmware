@@ -4,3 +4,14 @@ __pycache__/
 *.log
 logs/
 .env
+.env.*
+backups/
+*.o
+*.elf
+*.bin
+diagnostics/accuracy_*/
+diagnostics/validation_*/
+diagnostics/calibration_validation_summary_*/
+diagnostics/post_solder_test/security_verification/
+docs/production_consolidation_*/
+docs/calibration_integration_*/
